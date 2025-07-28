@@ -27,7 +27,10 @@ const getTicketName = async (ticketId) => {
 };
 
 export default {
-  branches: ["main", "release/*"],
+  branches: [
+    'main',
+    { name: "next", prerelease: true },
+  ],
   plugins: [
     "@semantic-release/commit-analyzer",
     [
@@ -46,7 +49,10 @@ export default {
             if (commit?.notes?.length) {
               transformed.notes = await Promise.all(
                 commit.notes.map(async (note) => {
-                  const ticketId = note.text.charAt(0) === '#' ? note.text.slice(1): note.text;
+                  const ticketId =
+                    note.text.charAt(0) === "#"
+                      ? note.text.slice(1)
+                      : note.text;
                   return note.title === REFS_Keyword
                     ? {
                         title: "Related Tickets",
@@ -64,6 +70,6 @@ export default {
         },
       },
     ],
-    "@semantic-release/github"
+    // "@semantic-release/github"
   ],
 };
