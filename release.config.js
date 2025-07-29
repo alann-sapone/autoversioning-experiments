@@ -29,10 +29,6 @@ const getTicketName = async (ticketId) => {
 export default {
   branches: [
     {
-      name: "main/*",
-      prerelease: "rc",
-    },
-    {
       name: "release/*",
     },
   ],
